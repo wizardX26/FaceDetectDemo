@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Vision View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="VisionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="VisionViewController" customModule="FaceDetectDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fL0-OO-dys">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2OU-Lt-TKD">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VisionCollectionViewCell" id="ss2-AL-Ic3" customClass="VisionCollectionViewCell" customModule="FaceDetectDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bZv-yD-sH2">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWx-nE-dJ7" customClass="CardSubtileEffect" customModule="FaceDetectDemo" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="8" width="112" height="112"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JZd-zk-QTl">
+                                                            <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
+                                                        </imageView>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="S5M-2k-vJG">
+                                                            <rect key="frame" x="46" y="46" width="20" height="20"/>
+                                                            <color key="color" name="SpinerColor"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="S5M-2k-vJG" firstAttribute="centerX" secondItem="pWx-nE-dJ7" secondAttribute="centerX" id="37V-rW-ZVc"/>
+                                                        <constraint firstItem="S5M-2k-vJG" firstAttribute="centerY" secondItem="pWx-nE-dJ7" secondAttribute="centerY" id="Agh-Pi-8ix"/>
+                                                        <constraint firstAttribute="bottom" secondItem="JZd-zk-QTl" secondAttribute="bottom" id="I5D-tO-Xq2"/>
+                                                        <constraint firstItem="JZd-zk-QTl" firstAttribute="top" secondItem="pWx-nE-dJ7" secondAttribute="top" id="uJd-rp-axh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JZd-zk-QTl" secondAttribute="trailing" id="v82-YW-S5b"/>
+                                                        <constraint firstItem="JZd-zk-QTl" firstAttribute="leading" secondItem="pWx-nE-dJ7" secondAttribute="leading" id="wwq-3z-ro0"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                            <real key="value" value="0.080000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                            <real key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                            <color key="value" name="ShadowColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="pWx-nE-dJ7" secondAttribute="bottom" constant="8" id="CtI-VL-KVX"/>
+                                                <constraint firstItem="pWx-nE-dJ7" firstAttribute="top" secondItem="bZv-yD-sH2" secondAttribute="top" constant="8" id="DP1-7Z-kS9"/>
+                                                <constraint firstAttribute="trailing" secondItem="pWx-nE-dJ7" secondAttribute="trailing" constant="8" id="KLH-Bo-g1u"/>
+                                                <constraint firstItem="pWx-nE-dJ7" firstAttribute="leading" secondItem="bZv-yD-sH2" secondAttribute="leading" constant="8" id="TOi-Fq-ojH"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="cardView" destination="pWx-nE-dJ7" id="Bjs-nQ-Scy"/>
+                                            <outlet property="imageView" destination="JZd-zk-QTl" id="QxE-cP-nyp"/>
+                                            <outlet property="spiner" destination="S5M-2k-vJG" id="ltk-WU-0Ft"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fL0-OO-dys" secondAttribute="bottom" id="4dg-mr-cWi"/>
+                            <constraint firstItem="fL0-OO-dys" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8Hb-SD-R11"/>
+                            <constraint firstItem="fL0-OO-dys" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Grx-Yq-FZ5"/>
+                            <constraint firstItem="fL0-OO-dys" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="amR-q8-Cqp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="visionCollectionView" destination="fL0-OO-dys" id="qfd-LZ-yI7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-34.351145038167935" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="ShadowColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SpinerColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

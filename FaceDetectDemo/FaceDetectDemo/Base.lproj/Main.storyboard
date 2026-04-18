@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bvk-6f-gFJ">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Face detect demo-->
+        <scene sceneID="gVV-Q7-X07">
+            <objects>
+                <viewController id="U05-bo-gOf" customClass="ViewController" customModule="FaceDetectDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OPN-bP-1g9">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xHU-sS-8RO">
+                                <rect key="frame" x="76.666666666666686" y="155" width="240" height="224"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xHU-sS-8RO" secondAttribute="height" multiplier="15:14" id="JXR-HF-qwa"/>
+                                    <constraint firstAttribute="height" constant="224" id="OxU-ng-9pX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCU-d6-JPV">
+                                <rect key="frame" x="16" y="413" width="70.333333333333329" height="27.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKm-1Z-wnV">
+                                <rect key="frame" x="253" y="406" width="124" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjP-vc-EoA">
+                                        <rect key="frame" x="4" y="4" width="116" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <menu key="menu" id="btH-GX-ul2">
+                                            <children>
+                                                <command title="Item 1" id="0hc-Ck-waS"/>
+                                                <command title="Item 2" id="GC3-13-ra1"/>
+                                            </children>
+                                        </menu>
+                                        <state key="normal" title="Choose model"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Bjn-l0-MgP"/>
+                                    <constraint firstAttribute="trailing" secondItem="tjP-vc-EoA" secondAttribute="trailing" constant="4" id="J3x-LH-ISq"/>
+                                    <constraint firstAttribute="width" secondItem="vKm-1Z-wnV" secondAttribute="height" multiplier="62:21" id="N0e-tu-Dgw"/>
+                                    <constraint firstItem="tjP-vc-EoA" firstAttribute="top" secondItem="vKm-1Z-wnV" secondAttribute="top" constant="4" id="WE5-dV-WMy"/>
+                                    <constraint firstAttribute="bottom" secondItem="tjP-vc-EoA" secondAttribute="bottom" constant="4" id="u3P-Ca-fAl"/>
+                                    <constraint firstItem="tjP-vc-EoA" firstAttribute="leading" secondItem="vKm-1Z-wnV" secondAttribute="leading" constant="4" id="yQ3-p4-kr4"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yqU-hS-sVu">
+                                <rect key="frame" x="90.666666666666686" y="450" width="212" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yqU-hS-sVu" secondAttribute="height" multiplier="106:18" id="DqN-Ch-thY"/>
+                                    <constraint firstAttribute="width" constant="212" id="Eod-Wf-CDo"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeValueSegmentedControler:" destination="U05-bo-gOf" eventType="valueChanged" id="kgM-Q0-2WP"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIb-cU-MU0">
+                                <rect key="frame" x="4" y="501" width="385" height="351"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MAJ-fl-3UC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VIb-cU-MU0" firstAttribute="top" secondItem="yqU-hS-sVu" secondAttribute="bottom" constant="15" id="7E6-Jk-e10"/>
+                            <constraint firstItem="yqU-hS-sVu" firstAttribute="top" secondItem="eCU-d6-JPV" secondAttribute="bottom" constant="9.3333333333333144" id="8um-u4-SKB"/>
+                            <constraint firstItem="MAJ-fl-3UC" firstAttribute="trailing" secondItem="vKm-1Z-wnV" secondAttribute="trailing" constant="16" id="9d9-P6-Qfi"/>
+                            <constraint firstItem="eCU-d6-JPV" firstAttribute="leading" secondItem="MAJ-fl-3UC" secondAttribute="leading" constant="16" id="CSq-G9-BUe"/>
+                            <constraint firstItem="VIb-cU-MU0" firstAttribute="centerX" secondItem="yqU-hS-sVu" secondAttribute="centerX" id="DWf-vn-oH6"/>
+                            <constraint firstItem="xHU-sS-8RO" firstAttribute="centerX" secondItem="MAJ-fl-3UC" secondAttribute="centerX" id="M4e-dX-0SM"/>
+                            <constraint firstItem="eCU-d6-JPV" firstAttribute="top" secondItem="xHU-sS-8RO" secondAttribute="bottom" constant="34" id="QrL-58-sDr"/>
+                            <constraint firstItem="VIb-cU-MU0" firstAttribute="leading" secondItem="MAJ-fl-3UC" secondAttribute="leading" constant="4" id="TBa-c2-XwQ"/>
+                            <constraint firstItem="xHU-sS-8RO" firstAttribute="top" secondItem="MAJ-fl-3UC" secondAttribute="top" id="YCc-Td-ebY"/>
+                            <constraint firstItem="vKm-1Z-wnV" firstAttribute="centerY" secondItem="eCU-d6-JPV" secondAttribute="centerY" id="exX-mG-S4m"/>
+                            <constraint firstItem="yqU-hS-sVu" firstAttribute="centerX" secondItem="xHU-sS-8RO" secondAttribute="centerX" id="pZe-vm-Asn"/>
+                            <constraint firstItem="VIb-cU-MU0" firstAttribute="bottom" secondItem="OPN-bP-1g9" secondAttribute="bottom" id="tza-HN-wir"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Face detect demo" id="Tlx-F3-hIl">
+                        <barButtonItem key="leftBarButtonItem" image="camera.on.rectangle" catalog="system" id="MRF-ck-h7g">
+                            <connections>
+                                <action selector="didTapLeftBarBtn:" destination="U05-bo-gOf" id="Bsl-xB-8bF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Detect" id="Tmp-8X-Tqi">
+                            <connections>
+                                <action selector="didTapRightBarBtn:" destination="U05-bo-gOf" id="pp8-N5-ZXl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentView" destination="VIb-cU-MU0" id="Xa1-oZ-pXJ"/>
+                        <outlet property="imageView" destination="xHU-sS-8RO" id="Akg-in-NVs"/>
+                        <outlet property="label" destination="eCU-d6-JPV" id="XI8-vN-KaU"/>
+                        <outlet property="modelButton" destination="tjP-vc-EoA" id="P00-eG-8Vm"/>
+                        <outlet property="outerBtnView" destination="vKm-1Z-wnV" id="mAD-ah-tOt"/>
+                        <outlet property="segmentedControl" destination="yqU-hS-sVu" id="65m-gC-uGP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2c-Q3-Urg" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835.8778625954196" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LzZ-mz-khl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bvk-6f-gFJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ATo-Ma-sTx">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U05-bo-gOf" kind="relationship" relationship="rootViewController" id="eLU-kO-osB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PTQ-vH-YgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909.1603053435115" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera.on.rectangle" catalog="system" width="128" height="98"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
