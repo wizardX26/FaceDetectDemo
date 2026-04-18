@@ -53,11 +53,7 @@ class CameraViewController: UIViewController, StoryboardInstantiable {
     @IBAction func didTapRightBarBtn(_ sender: Any) {
         if !self.result.isEmpty {
             self.delegate?.didTakeImageResult(image: self.result)
-            if let navigationController, navigationController.viewControllers.count > 1 {
-                navigationController.popViewController(animated: true)
-            } else {
                 dismiss(animated: true)
-            }
         } else {
             dismiss(animated: true)
         }

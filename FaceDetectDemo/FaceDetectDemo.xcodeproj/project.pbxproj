@@ -34,6 +34,7 @@
 		D09E2DFB2F93D81C005C178C /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2DFA2F93D81C005C178C /* CameraService.swift */; };
 		D09E2DFD2F93D864005C178C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2DFC2F93D864005C178C /* CameraViewController.swift */; };
 		D09E2E002F93D87C005C178C /* CameraViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D09E2DFF2F93D87C005C178C /* CameraViewController.storyboard */; };
+		D09E2E022F93EF68005C178C /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2E012F93EF68005C178C /* Alertable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		D09E2DFA2F93D81C005C178C /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		D09E2DFC2F93D864005C178C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		D09E2DFF2F93D87C005C178C /* CameraViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraViewController.storyboard; sourceTree = "<group>"; };
+		D09E2E012F93EF68005C178C /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				D06AF8932F92820D00176541 /* UIView+Extensions.swift */,
 				D06AF8952F9282E600176541 /* UIViewController+Extensions.swift */,
 				D09E2DF22F929636005C178C /* StoryboardInstantiable.swift */,
+				D09E2E012F93EF68005C178C /* Alertable.swift */,
 			);
 			path = FaceDetectDemo;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				D09E2DF12F928DA6005C178C /* MLKitViewController.swift in Sources */,
 				D09E2DF72F929CB3005C178C /* Layout.swift in Sources */,
 				D06AF8762F91FDD800176541 /* MLKitModel.swift in Sources */,
+				D09E2E022F93EF68005C178C /* Alertable.swift in Sources */,
 				D06AF88E2F9206A600176541 /* VisionViewController.swift in Sources */,
 				D06AF8852F9201C900176541 /* DataSource.swift in Sources */,
 				D09E2DF32F929636005C178C /* StoryboardInstantiable.swift in Sources */,
