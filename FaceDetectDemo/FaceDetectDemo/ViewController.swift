@@ -15,7 +15,7 @@ protocol MLKitFaceDetecting: AnyObject {
     func detectMLKitFaces(in image: UIImage) async throws -> [MLKitFace]
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Alertable {
         
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var contentView: UIView!
+    
+//    private var feedback = UIImpactFeedbackGenerator()
+    private var feedback = UINotificationFeedbackGenerator()
     
     private var visionViewCOntroller: VisionViewController!
     private var mlKitViewController: MLKitViewController!
@@ -37,6 +40,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupFeedBack()
         self.setupMenu()
         self.setupChildViewControllers()
         self.switchController(index: self.segmentedControl.selectedSegmentIndex)
@@ -66,25 +70,41 @@ class ViewController: UIViewController {
     
 
     @IBAction func didTapRightBarBtn(_ sender: Any) {
-        self.animateView(self.outerBtnView)
+        switch self.selectedModel {
+        case .none: self.animateView(self.outerBtnView)
+        case .vision:
+            guard let modelInput = self.imageView.image else { return }
+            self.doVisionDetect(modelInput)
+        case .mlkit: break
+        }
+        
     }
     
     @IBAction func didChangeValueSegmentedControler(_ sender: Any) {
         self.switchController(index: self.segmentedControl.selectedSegmentIndex)
     }
     
+    private func setupFeedBack() {
+        self.feedback = UINotificationFeedbackGenerator(view: self.outerBtnView)
+    }
+    
     enum ModelType {
         case vision
         case mlkit
+        case none
     }
     
+    private var selectedModel: ModelType = .none
+    
     private func setupMenu() {
-        let visionAction = UIAction(title: "Vision") { [weak self] _ in
-            self?.selectModel(.vision)
+        let visionAction = UIAction(title: "Vision",
+                                    state: self.selectedModel == .vision ? .on : .off) { [weak self] _ in
+            self?.updateSeclection(.vision)
         }
         
-        let mlkitAction = UIAction(title: "MLKit") { [weak self] _ in
-            self?.selectModel(.mlkit)
+        let mlkitAction = UIAction(title: "MLKit",
+                                   state: self.selectedModel == .mlkit ? .on : .off) { [weak self] _ in
+            self?.updateSeclection(.mlkit)
         }
         
         let menu = UIMenu(title: "Select Model",
@@ -95,14 +115,19 @@ class ViewController: UIViewController {
         self.modelButton.showsMenuAsPrimaryAction = true
     }
     
-    private func selectModel(_ model: ModelType) {
+    private func updateSeclection(_ model: ModelType) {
+        self.selectedModel = model
+        
         switch model {
+        case .none:
+            self.modelButton.setTitle("Choose Model", for: .highlighted)
         case .vision:
             self.modelButton.setTitle("Vision", for: .normal)
-            
         case .mlkit:
             self.modelButton.setTitle("MLKit", for: .normal)
         }
+        
+        self.setupMenu()
     }
     
     
@@ -131,13 +156,13 @@ class ViewController: UIViewController {
     }
     
     func animateView(_ view: UIView) {
+        self.feedback.prepare()
+        
         UIView.animate(withDuration: 0.25, animations: {
-            
             view.transform = CGAffineTransform(translationX: -4, y: 2)
-            
         }) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                
+                self.feedback.notificationOccurred(.warning)
                 UIView.animate(withDuration: 0.2, animations: {
                     view.transform = CGAffineTransform(translationX: 4, y: -4)
                 }) { _ in
@@ -150,6 +175,25 @@ class ViewController: UIViewController {
                         view.transform = .identity
                     }
                 }
+            }
+        }
+    }
+    
+    func doVisionDetect(_ image: UIImage) {
+        let visionFaceDetector = VisionFaceDetecter()
+        
+        Task {
+            do {
+                let faces = try await visionFaceDetector.extractFaces(from: image)
+                if faces.isEmpty {
+                    self.showAlert(title: "VISION", message: "Vision output is empty.")
+                } else {
+                    self.resultImage = faces
+                    self.visionViewCOntroller.reloadData(self.resultImage)
+                }
+                
+            } catch {
+                self.showAlert(title: "Detect failed", message: error.localizedDescription)
             }
         }
     }

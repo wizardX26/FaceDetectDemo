@@ -26,6 +26,11 @@ class VisionViewController: UIViewController, StoryboardInstantiable {
         self.loadMockData()
     }
     
+    func reloadData(_ items: [UIImage]) {
+        self.visionDataSource.faceImages = items
+        self.visionCollectionView.reloadData()
+    }
+    
 
     /*
     // MARK: - Navigation

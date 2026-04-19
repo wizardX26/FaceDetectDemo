@@ -9,23 +9,31 @@ import UIKit
 
 class DataSource: NSObject, UICollectionViewDataSource {
     var items: [VisionFace]?
+    var faceImages: [UIImage]?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.faceImages != nil {
+            return self.faceImages?.count ?? 0
+        }
         return self.items?.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let identifier = "VisionCollectionViewCell"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! VisionCollectionViewCell
-        //let item = self.items?[indexPath.item]
-        cell.update(display: nil)
-        //cell.update(display: self.mockImage(for: item, index: indexPath.item))
-        
+
+        let displayImage: UIImage?
+        if let faces = self.faceImages {
+            displayImage = indexPath.item < faces.count ? faces[indexPath.item] : nil
+        } else if let items = self.items, indexPath.item < items.count {
+            displayImage = mockImage(for: items[indexPath.item], index: indexPath.item)
+        } else {
+            displayImage = nil
+        }
+        cell.update(display: displayImage)
+
         return cell
     }
-    
-    
 }
 
 private extension DataSource {
