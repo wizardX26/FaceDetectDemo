@@ -74,7 +74,7 @@ class ViewController: UIViewController, Alertable {
         case .none: self.animateView(self.outerBtnView)
         case .vision:
             guard let modelInput = self.imageView.image else { return }
-            self.doVisionDetect(modelInput)
+            self.doVisionDetect(FaceDetectInput(image: modelInput))
         case .mlkit: break
         }
         
@@ -179,12 +179,12 @@ class ViewController: UIViewController, Alertable {
         }
     }
     
-    func doVisionDetect(_ image: UIImage) {
+    func doVisionDetect(_ input: FaceDetectInput) {
         let visionFaceDetector = VisionFaceDetecter()
         
         Task {
             do {
-                let faces = try await visionFaceDetector.extractFaces(from: image)
+                let faces = try await visionFaceDetector.extractFaces(from: input.image)
                 if faces.isEmpty {
                     self.showAlert(title: "VISION", message: "Vision output is empty.")
                 } else {
