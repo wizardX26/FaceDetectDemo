@@ -12,12 +12,18 @@ class MLKitViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var faceResultContainerView: UIView!
     @IBOutlet weak var emptyLabel: UILabel!
     
-    private var mlkitCollectionViewControler: MLKitCollectionViewController?
+    var mlkitCollectionViewControler: MLKitCollectionViewController?
+    private var pendingFaces: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    func reloadData(_ images: [UIImage]) {
+        self.pendingFaces = images
+        self.mlkitCollectionViewControler?.reloadData(images)
     }
     
 
@@ -36,6 +42,7 @@ class MLKitViewController: UIViewController, StoryboardInstantiable {
                     self?.emptyLabel.isHidden = !isEmpty
                 }
             }
+            destination.reloadData(self.pendingFaces)
         }
     }
     

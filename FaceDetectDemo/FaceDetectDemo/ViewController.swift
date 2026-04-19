@@ -28,7 +28,7 @@ class ViewController: UIViewController, Alertable {
 //    private var feedback = UIImpactFeedbackGenerator()
     private var feedback = UINotificationFeedbackGenerator()
     
-    private var visionViewCOntroller: VisionViewController!
+    private var visionViewController: VisionViewController!
     private var mlKitViewController: MLKitViewController!
     private var cameraViewController: CameraViewController!
     
@@ -73,9 +73,16 @@ class ViewController: UIViewController, Alertable {
         switch self.selectedModel {
         case .none: self.animateView(self.outerBtnView)
         case .vision:
-            guard let modelInput = self.imageView.image else { return }
+            guard let modelInput = self.imageView.image else {
+                return self.showAlert(message: "Vision input image input is empty.")
+            }
             self.doVisionDetect(FaceDetectInput(image: modelInput))
-        case .mlkit: break
+            
+        case .mlkit:
+            guard let modelInput = self.imageView.image else {
+                return self.showAlert(message: "MLKit model image input is empty.")
+            }
+            self.doMLKitDetect(FaceDetectInput(image: modelInput))
         }
         
     }
@@ -85,7 +92,12 @@ class ViewController: UIViewController, Alertable {
     }
     
     private func setupFeedBack() {
-        self.feedback = UINotificationFeedbackGenerator(view: self.outerBtnView)
+        if #available(iOS 17.5, *) {
+            self.feedback = UINotificationFeedbackGenerator(view: self.outerBtnView)
+        } else {
+            // Fallback on earlier versions
+            self.showAlert(message: "Please choose model to detect face.")
+        }
     }
     
     enum ModelType {
@@ -132,7 +144,7 @@ class ViewController: UIViewController, Alertable {
     
     
     private func setupChildViewControllers() {
-        self.visionViewCOntroller = VisionViewController.instantiateViewController()
+        self.visionViewController = VisionViewController.instantiateViewController()
         self.mlKitViewController = MLKitViewController.instantiateViewController()
         self.cameraViewController = CameraViewController.instantiateViewController()
         self.cameraViewController.delegate = self
@@ -142,7 +154,7 @@ class ViewController: UIViewController, Alertable {
         let destinationController: UIViewController
         
         switch index {
-        case 0: destinationController = self.visionViewCOntroller
+        case 0: destinationController = self.visionViewController
         case 1: destinationController = self.mlKitViewController
             
         default: return
@@ -189,7 +201,28 @@ class ViewController: UIViewController, Alertable {
                     self.showAlert(title: "VISION", message: "Vision output is empty.")
                 } else {
                     self.resultImage = faces
-                    self.visionViewCOntroller.reloadData(self.resultImage)
+                    self.visionViewController.reloadData(self.resultImage)
+                }
+                
+            } catch {
+                self.showAlert(title: "Detect failed", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func doMLKitDetect(_ input: FaceDetectInput) {
+        let mlkitFaceDetector = MLKitFaceDetecter()
+        
+        Task {
+            do {
+                let faces = try await mlkitFaceDetector.extractFaces(from: input.image)
+                if faces.isEmpty {
+//                    self.resultImage = []
+//                    self.mlKitViewController.reloadData([])
+                    self.showAlert(title: "MLKIT", message: "MLKit output is empty.")
+                } else {
+                    self.resultImage = faces
+                    self.mlKitViewController.reloadData(self.resultImage)
                 }
                 
             } catch {

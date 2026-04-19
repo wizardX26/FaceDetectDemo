@@ -11,7 +11,7 @@ private let reuseIdentifier = "MLKitCollectionViewCell"
 
 class MLKitCollectionViewController: UICollectionViewController {
     
-    var items: [Int] = Array(0..<10) {
+    private var faceImages: [UIImage] = [] {
         didSet {
             self.updateEmptyState()
         }
@@ -33,12 +33,13 @@ class MLKitCollectionViewController: UICollectionViewController {
         self.updateEmptyState()
     }
     
-    func reload() {
+    func reloadData(_ images: [UIImage]) {
+        self.faceImages = images
         collectionView.reloadData()
     }
     
     private func updateEmptyState() {
-        self.onDataChanged?(self.items.isEmpty)
+        self.onDataChanged?(self.faceImages.isEmpty)
     }
 
     /*
@@ -61,7 +62,7 @@ class MLKitCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.items.count
+        return self.faceImages.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,8 +71,8 @@ class MLKitCollectionViewController: UICollectionViewController {
             return UICollectionViewCell()
         }
     
-        // Configure the cell
-        cell.imageView.backgroundColor = .black
+        let image = self.faceImages[indexPath.item]
+        cell.fill(with: image)
         return cell
     }
 
@@ -124,7 +125,7 @@ extension MLKitCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
