@@ -36,6 +36,8 @@
 		D09E2E002F93D87C005C178C /* CameraViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D09E2DFF2F93D87C005C178C /* CameraViewController.storyboard */; };
 		D09E2E022F93EF68005C178C /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2E012F93EF68005C178C /* Alertable.swift */; };
 		D09E2E082F9481DA005C178C /* CGImagePropertyOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2E072F9481DA005C178C /* CGImagePropertyOrientation+Extensions.swift */; };
+		D09E2E0C2F952727005C178C /* MLKitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2E0B2F952727005C178C /* MLKitCollectionViewCell.swift */; };
+		D09E2E0E2F952751005C178C /* MLKitCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2E0D2F952751005C178C /* MLKitCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		D09E2DFF2F93D87C005C178C /* CameraViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraViewController.storyboard; sourceTree = "<group>"; };
 		D09E2E012F93EF68005C178C /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		D09E2E072F9481DA005C178C /* CGImagePropertyOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+Extensions.swift"; sourceTree = "<group>"; };
+		D09E2E0B2F952727005C178C /* MLKitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitCollectionViewCell.swift; sourceTree = "<group>"; };
+		D09E2E0D2F952751005C178C /* MLKitCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,7 @@
 		D06AF88C2F92066E00176541 /* MLKitViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D09E2E0A2F95227C005C178C /* UICollectionView */,
 				D09E2DF02F928DA6005C178C /* MLKitViewController.swift */,
 				D09E2DF42F92971D005C178C /* MLKitViewController.storyboard */,
 			);
@@ -183,6 +188,15 @@
 				D09E2DFF2F93D87C005C178C /* CameraViewController.storyboard */,
 			);
 			path = "Camera&Library";
+			sourceTree = "<group>";
+		};
+		D09E2E0A2F95227C005C178C /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				D09E2E0D2F952751005C178C /* MLKitCollectionViewController.swift */,
+				D09E2E0B2F952727005C178C /* MLKitCollectionViewCell.swift */,
+			);
+			path = UICollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D09E2E0C2F952727005C178C /* MLKitCollectionViewCell.swift in Sources */,
 				D09E2DFB2F93D81C005C178C /* CameraService.swift in Sources */,
+				D09E2E0E2F952751005C178C /* MLKitCollectionViewController.swift in Sources */,
 				D06AF8942F92820D00176541 /* UIView+Extensions.swift in Sources */,
 				D06AF8692F91FDA100176541 /* SceneDelegate.swift in Sources */,
 				D06AF8752F91FDD800176541 /* MLKitFaceDetecter.swift in Sources */,
