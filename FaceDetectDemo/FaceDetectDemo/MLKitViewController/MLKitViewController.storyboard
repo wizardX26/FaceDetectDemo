@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -74,19 +75,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PAw-Xk-P9p">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srn-FA-7Pg">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        </imageView>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PAw-Xk-P9p">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="PAw-Xk-P9p" firstAttribute="leading" secondItem="srn-FA-7Pg" secondAttribute="leading" id="9ut-0X-oj7"/>
+                                                <constraint firstAttribute="bottom" secondItem="PAw-Xk-P9p" secondAttribute="bottom" id="BL5-3l-2PX"/>
+                                                <constraint firstAttribute="trailing" secondItem="PAw-Xk-P9p" secondAttribute="trailing" id="TgM-7N-qXY"/>
+                                                <constraint firstItem="PAw-Xk-P9p" firstAttribute="top" secondItem="srn-FA-7Pg" secondAttribute="top" id="qga-s5-nps"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="PAw-Xk-P9p" secondAttribute="bottom" id="NZy-rN-zU6"/>
-                                        <constraint firstItem="PAw-Xk-P9p" firstAttribute="leading" secondItem="wfr-UV-WMV" secondAttribute="leading" id="P6P-rO-YhP"/>
-                                        <constraint firstAttribute="trailing" secondItem="PAw-Xk-P9p" secondAttribute="trailing" id="klw-Ga-cmN"/>
-                                        <constraint firstItem="PAw-Xk-P9p" firstAttribute="top" secondItem="wfr-UV-WMV" secondAttribute="top" id="vx5-Ku-qz8"/>
+                                        <constraint firstItem="srn-FA-7Pg" firstAttribute="leading" secondItem="wfr-UV-WMV" secondAttribute="leading" id="45b-rc-e9c"/>
+                                        <constraint firstItem="srn-FA-7Pg" firstAttribute="top" secondItem="wfr-UV-WMV" secondAttribute="top" id="Skj-tc-hGV"/>
+                                        <constraint firstAttribute="trailing" secondItem="srn-FA-7Pg" secondAttribute="trailing" id="uGO-R2-xUr"/>
+                                        <constraint firstAttribute="bottom" secondItem="srn-FA-7Pg" secondAttribute="bottom" id="xeU-m7-udq"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imageView" destination="PAw-Xk-P9p" id="arM-Tj-sIy"/>
+                                    <outlet property="outerView" destination="srn-FA-7Pg" id="Slo-7R-dbY"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

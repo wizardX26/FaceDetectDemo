@@ -10,6 +10,12 @@ import UIKit
 private let reuseIdentifier = "MLKitCollectionViewCell"
 
 class MLKitCollectionViewController: UICollectionViewController {
+    private let sectionInset: CGFloat = 16
+    private let itemSpacing: CGFloat = 12
+    private let lineSpacing: CGFloat = 8
+    private let numberOfColumns: CGFloat = 3
+    
+    private var hasInvalidatedLayout = false
     
     private var faceImages: [UIImage] = [] {
         didSet {
@@ -30,12 +36,28 @@ class MLKitCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
         collectionView.showsVerticalScrollIndicator = false
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            // Ensure delegate sizing is used consistently after each reload.
+            layout.estimatedItemSize = .zero
+        }
         self.updateEmptyState()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !self.hasInvalidatedLayout {
+            self.hasInvalidatedLayout = true
+            collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
     
     func reloadData(_ images: [UIImage]) {
         self.faceImages = images
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+//            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.reloadData()
+        }
     }
     
     private func updateEmptyState() {
@@ -111,28 +133,23 @@ class MLKitCollectionViewController: UICollectionViewController {
 
 extension MLKitCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = 8
-        let numberOfCollumns: CGFloat = 3
-        
-        let sectionInset: CGFloat = 16 * 2
-        let totalSpacing = (numberOfCollumns - 1) * spacing
-        
-        let availabelWidth = collectionView.bounds.width - sectionInset - totalSpacing
-        let itemWidth = floor(availabelWidth / numberOfCollumns)
-        
-        
+        let totalHorizontalInset = self.sectionInset * 2
+        let totalSpacing = (self.numberOfColumns - 1) * self.itemSpacing
+        let availableWidth = collectionView.bounds.width - totalHorizontalInset - totalSpacing
+        let itemWidth = floor(availableWidth / self.numberOfColumns)
+
         return CGSize(width: itemWidth, height: itemWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 12
+        return self.itemSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return self.lineSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        return UIEdgeInsets(top: self.sectionInset, left: self.sectionInset, bottom: self.sectionInset, right: self.sectionInset)
     }
 }
