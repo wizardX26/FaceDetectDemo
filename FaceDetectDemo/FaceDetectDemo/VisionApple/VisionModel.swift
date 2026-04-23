@@ -5,12 +5,7 @@
 //  Created by wizard.os25 on 16/4/26.
 //
 
-import UIKit
-
-struct VisionFaceOutput {
-    let faceImage: UIImage
-    let face: VisionFace
-}
+import Foundation
 
 struct VisionFace {
     let boundingBox: CGRect

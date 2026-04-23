@@ -17,7 +17,7 @@ class MLKitCollectionViewController: UICollectionViewController {
     
     private var hasInvalidatedLayout = false
     
-    private var outputs: [MLKitFaceOutput] = [] {
+    private var faceImages: [UIImage] = [] {
         didSet {
             self.updateEmptyState()
         }
@@ -52,8 +52,8 @@ class MLKitCollectionViewController: UICollectionViewController {
         }
     }
     
-    func reloadData(_ outputs: [MLKitFaceOutput]) {
-        self.outputs = outputs
+    func reloadData(_ images: [UIImage]) {
+        self.faceImages = images
         DispatchQueue.main.async {
 //            self.collectionView.collectionViewLayout.invalidateLayout()
             self.collectionView.reloadData()
@@ -61,7 +61,7 @@ class MLKitCollectionViewController: UICollectionViewController {
     }
     
     private func updateEmptyState() {
-        self.onDataChanged?(self.outputs.isEmpty)
+        self.onDataChanged?(self.faceImages.isEmpty)
     }
 
     /*
@@ -84,7 +84,7 @@ class MLKitCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.outputs.count
+        return self.faceImages.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,19 +93,12 @@ class MLKitCollectionViewController: UICollectionViewController {
             return UICollectionViewCell()
         }
     
-        let output = self.outputs[indexPath.item]
-        cell.fill(with: output.faceImage)
+        let image = self.faceImages[indexPath.item]
+        cell.fill(with: image)
         return cell
     }
 
     // MARK: UICollectionViewDelegate
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.item >= 0, indexPath.item < self.outputs.count else { return }
-        let detailViewController = MLKitDetailViewController.instantiateViewController()
-        detailViewController.configure(with: self.outputs[indexPath.item])
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

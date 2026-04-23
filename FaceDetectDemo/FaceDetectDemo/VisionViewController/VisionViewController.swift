@@ -19,9 +19,7 @@ class VisionViewController: UIViewController, StoryboardInstantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.visionDelegate.dataSource = self.visionDataSource
-        self.visionDelegate.hostViewController = self
+
         self.visionCollectionView.dataSource = self.visionDataSource
         self.visionCollectionView.delegate = self.visionDelegate
         self.visionCollectionView.collectionViewLayout = self.visionLayout
@@ -29,15 +27,7 @@ class VisionViewController: UIViewController, StoryboardInstantiable {
     }
     
     func reloadData(_ items: [UIImage]) {
-        self.visionDataSource.outputs = nil
         self.visionDataSource.faceImages = items
-        self.visionCollectionView.reloadData()
-    }
-
-    func reloadData(_ outputs: [VisionFaceOutput]) {
-        self.visionDataSource.outputs = outputs
-        self.visionDataSource.faceImages = outputs.map(\.faceImage)
-        self.visionDataSource.items = outputs.map(\.face)
         self.visionCollectionView.reloadData()
     }
     
