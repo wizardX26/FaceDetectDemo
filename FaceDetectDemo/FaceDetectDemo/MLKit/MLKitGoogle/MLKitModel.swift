@@ -6,6 +6,12 @@
 //
 
 import Foundation
+import UIKit
+
+struct MLKitFaceOutput {
+    let faceImage: UIImage
+    let face: MLKitFace
+}
 
 struct MLKitFace {
     let frame: CGRect
