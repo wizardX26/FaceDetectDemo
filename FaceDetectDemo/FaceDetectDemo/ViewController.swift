@@ -35,6 +35,7 @@ class ViewController: UIViewController, Alertable {
     private var currentViewController: UIViewController?
 
     private var photosPicker: PhotosPicker!
+    private var resultFaces: [VisionFaceOutput] = []
     private var resultImage: [UIImage] = []
     
     override func viewDidLoad() {
@@ -196,12 +197,13 @@ class ViewController: UIViewController, Alertable {
         
         Task {
             do {
-                let faces = try await visionFaceDetector.extractFaces(from: input.image)
-                if faces.isEmpty {
+                let outputs = try await visionFaceDetector.extractFaceOutputs(from: input.image)
+                if outputs.isEmpty {
                     self.showAlert(title: "VISION", message: "Vision output is empty.")
                 } else {
-                    self.resultImage = faces
-                    self.visionViewController.reloadData(self.resultImage)
+                    self.resultFaces = outputs
+                    self.resultImage = self.resultFaces.map(\.faceImage)
+                    self.visionViewController.reloadData(self.resultFaces)
                 }
                 
             } catch {
@@ -215,14 +217,14 @@ class ViewController: UIViewController, Alertable {
         
         Task {
             do {
-                let faces = try await mlkitFaceDetector.extractFaces(from: input.image)
-                if faces.isEmpty {
+                let outputs = try await mlkitFaceDetector.extractFaceOutputs(from: input.image)
+                if outputs.isEmpty {
 //                    self.resultImage = []
 //                    self.mlKitViewController.reloadData([])
                     self.showAlert(title: "MLKIT", message: "MLKit output is empty.")
                 } else {
-                    self.resultImage = faces
-                    self.mlKitViewController.reloadData(self.resultImage)
+                    self.resultImage = outputs.map(\.faceImage)
+                    self.mlKitViewController.reloadData(outputs)
                 }
                 
             } catch {
