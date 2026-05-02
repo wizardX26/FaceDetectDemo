@@ -12,8 +12,6 @@ The diagram below summarizes **user goals** for FaceDetectDemo at an overview le
 
 ![FaceDetectDemo use case overview](./Diagrams/Usecase/usecase.png)
 
-How this README and diagram are maintained: [`readme_instruction.md`](./readme_instruction.md) · PlantUML / PNG workflow: [`Diagrams/Usecase/usecase_instruction.md`](./Diagrams/Usecase/usecase_instruction.md).
-
 ## 3. Architecture
 
 At a high level, a single **root** `ViewController` owns shared chrome (image preview, model picker, detect action) and **embeds** child controllers in a container: `VisionViewController` or `MLKitViewController` depending on a segmented control. Detection runs asynchronously (`async`/`await`); results reload collection views in the active module. Vision uses `VNDetectFaceLandmarksRequest`; ML Kit uses `FaceDetector` via **GoogleMLKit/FaceDetection**.
@@ -27,7 +25,7 @@ At a high level, a single **root** `ViewController` owns shared chrome (image pr
 
 ## 5. Setup
 
-1. **Requirements:** macOS with Xcode, [CocoaPods](https://cocoapods.org/), and an iOS device(MLKit 3rd and Camera permissions apply on device).
+1. **Requirements:** macOS with Xcode, [CocoaPods](https://cocoapods.org/), and an iOS device (MLKit 3rd party and Camera permissions apply on device).
 
 2. **Install dependencies** from the `FaceDetectDemo` directory:
 
